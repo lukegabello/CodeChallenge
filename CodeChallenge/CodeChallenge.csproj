@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<RootNamespace>CodeChallenge</RootNamespace>
@@ -15,8 +15,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.5" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
 	</ItemGroup>
 
 </Project>
