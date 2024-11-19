@@ -11,12 +11,22 @@ namespace CodeChallenge.Controllers
 		private readonly ILogger _logger;
 		private readonly ICompensationService _compensationService;
 
+		/// <summary>
+		/// Constructor for the compensation controller
+		/// </summary>
+		/// <param name="logger"></param>
+		/// <param name="compensationService"></param>
 		public CompensationController(ILogger<CompensationController> logger, ICompensationService  compensationService)
 		{
 			_logger = logger;
 			_compensationService = compensationService;
 		}
 
+		/// <summary>
+		/// Creates a compensation entry for an existing employee
+		/// </summary>
+		/// <param name="compensation"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public IActionResult CreateCompensation([FromBody] Compensation compensation)
 		{
@@ -27,6 +37,11 @@ namespace CodeChallenge.Controllers
 			return CreatedAtRoute("getCompensationByEmployeeId", new { employeeId = compensation.EmployeeId, salary = compensation.Salary, effectiveDate = compensation.EffectiveDate }, compensation);
 		}
 
+		/// <summary>
+		/// Get the compensation for a given employee id
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[HttpGet("{id}", Name = "getCompensationByEmployeeId")]
 		public IActionResult GetCompensationByEmployeeId(String id)
 		{

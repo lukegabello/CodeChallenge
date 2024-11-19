@@ -4,7 +4,10 @@ using CodeChallenge.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace CodeChallenge.Services
-{
+{   
+	/// <summary>
+	/// Service Class providing employee reporting information
+	/// </summary>
 	public class EmployeeReportingService : IEmployeeReportingService
 	{
 		private readonly IEmployeeRepository _employeeRepository;

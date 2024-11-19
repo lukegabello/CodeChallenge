@@ -12,12 +12,22 @@ namespace CodeChallenge.Controllers
 		private readonly ILogger _logger;
 		private readonly IEmployeeReportingService _employeeReportingServiceService;
 
+		/// <summary>
+		/// Constructor for the Employee Reporting Controller
+		/// </summary>
+		/// <param name="logger"></param>
+		/// <param name="employeeReportingService"></param>
 		public EmployeeReportingController(ILogger<EmployeeReportingController> logger, IEmployeeReportingService employeeReportingService)
 		{
 			_logger = logger;
 			_employeeReportingServiceService = employeeReportingService;
 		}
 
+		/// <summary>
+		/// Gets the Employee reporting structure for the given employee Id
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[HttpGet("{id}", Name = "getEmployeeReportStructureById")]
 		public IActionResult GetEmployeeReportStructureById(String id)
 		{
