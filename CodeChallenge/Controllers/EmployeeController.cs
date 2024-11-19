@@ -45,10 +45,10 @@ namespace CodeChallenge.Controllers
             return Ok(employee);
         }
 
-        [HttpPut("{id}")]
+		[HttpPut("{id}")]
         public IActionResult ReplaceEmployee(String id, [FromBody]Employee newEmployee)
         {
-            _logger.LogDebug($"Recieved employee update request for '{id}'");
+            _logger.LogDebug($"Received employee update request for '{id}'");
 
             var existingEmployee = _employeeService.GetById(id);
             if (existingEmployee == null)

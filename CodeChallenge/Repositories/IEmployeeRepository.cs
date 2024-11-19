@@ -8,7 +8,7 @@ namespace CodeChallenge.Repositories
     {
         Employee GetById(String id);
         Employee Add(Employee employee);
-        Employee Remove(Employee employee);
-        Task SaveAsync();
+		Employee Remove(Employee employee);
+		Task SaveAsync();
     }
 }
