@@ -36,7 +36,8 @@ namespace CodeChallenge.Controllers
 
 			_compensationService.Create(compensation);
 
-			return CreatedAtRoute("getCompensationByEmployeeId", new { compensationId = compensation.CompensationId }, compensation);
+			//return CreatedAtRoute("getCompensationByEmployeeId", new { employeeId = compensation.EmployeeId }, compensation);
+			return CreatedAtRoute(new { employeeId = compensation.EmployeeId }, compensation);
 		}
 
 		/// <summary>

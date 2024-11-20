@@ -65,8 +65,13 @@ namespace CodeChallenge.Repositories
 	        if (employee != null)
 	        {
 		        compensation.CompensationId = Guid.NewGuid().ToString();
-		        _employeeContext.Add(compensation);
-		        return compensation;
+				var  added =  _employeeContext.Add(compensation);
+
+                // Verify added
+				if (added.State == EntityState.Added)
+				{
+					return compensation;
+				}
 	        }
 
 	        return null;

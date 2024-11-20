@@ -54,6 +54,58 @@ namespace CodeCodeChallenge.Tests.Integration
 	        Assert.IsNotNull(newCompensation.EmployeeId);
         }
 
+        [TestMethod]
+        public void GetEmployeeCompensationById_Returns_Ok()
+        {
+	        // Arrange
+	        // Give John Lennon some cash
+	        var compensationJohn = new Compensation()
+	        {
+		        EmployeeId = "16a596ae-edd3-4847-99fe-c4518e82c86f",
+		        Salary = 130000.50F,
+		        EffectiveDate = DateTime.Now
+	        };
+
+	        var compensationPaul = new Compensation()
+	        {
+		        EmployeeId = "b7839309-3348-463b-a7e3-5de1c168beb3",
+		        Salary = 430050.99F,
+		        EffectiveDate = DateTime.Now
+	        };
+
+			var requestContentJohn = new JsonSerialization().ToJson(compensationJohn);
+			var requestContentPaul = new JsonSerialization().ToJson(compensationPaul);
+
+			// Execute
+			var postRequestTaskJohn = _httpClient.PostAsync("api/compensation",
+		        new StringContent(requestContentJohn, Encoding.UTF8, "application/json"));
+	        var responseCreateJohn = postRequestTaskJohn.Result;
+
+	        var postRequestTaskPaul = _httpClient.PostAsync("api/compensation",
+		        new StringContent(requestContentPaul, Encoding.UTF8, "application/json"));
+	        var responseCreatePaul = postRequestTaskPaul.Result;
+
+			// Execute
+			var getRequestTaskJohn = _httpClient.GetAsync($"api/compensation/{compensationJohn.EmployeeId}");
+	        var responseGetJohn = getRequestTaskJohn.Result;
+
+	        var getRequestTaskPaul = _httpClient.GetAsync($"api/compensation/{compensationPaul.EmployeeId}");
+	        var responseGetPaul = getRequestTaskPaul.Result;
+
+			// Assert
+			Assert.AreEqual(HttpStatusCode.OK, responseGetJohn.StatusCode);
+	        var compensationReturnedJohn = responseGetJohn.DeserializeContent<Compensation>();
+	        Assert.AreEqual(compensationJohn.EmployeeId, compensationReturnedJohn.EmployeeId);
+	        Assert.AreEqual(compensationJohn.Salary, compensationReturnedJohn.Salary);
+	        Assert.AreEqual(compensationJohn.EffectiveDate, compensationReturnedJohn.EffectiveDate);
+
+	        Assert.AreEqual(HttpStatusCode.OK, responseGetPaul.StatusCode);
+	        var compensationReturnedPaul = responseGetPaul.DeserializeContent<Compensation>();
+	        Assert.AreEqual(compensationPaul.EmployeeId, compensationReturnedPaul.EmployeeId);
+	        Assert.AreEqual(compensationPaul.Salary, compensationReturnedPaul.Salary);
+	        Assert.AreEqual(compensationPaul.EffectiveDate, compensationReturnedPaul.EffectiveDate);
+        }
+
 		[ClassCleanup]
         public static void CleanUpTest()
         {
