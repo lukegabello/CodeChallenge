@@ -11,17 +11,17 @@ namespace CodeChallenge.Controllers
 	public class CompensationController : ControllerBase
 	{
 		private readonly ILogger _logger;
-		private readonly IEmployeeService _employeeService;
+		private readonly ICompensationService _compensationService;
 
 		/// <summary>
 		/// Constructor for the compensation controller
 		/// </summary>
 		/// <param name="logger"></param>
 		/// <param name="compensationService"></param>
-		public CompensationController(ILogger<CompensationController> logger, IEmployeeService employeeService)
+		public CompensationController(ILogger<CompensationController> logger, ICompensationService compensationService)
 		{
 			_logger = logger;
-			_employeeService = employeeService;
+			_compensationService = compensationService;
 		}
 
 		/// <summary>
@@ -34,11 +34,9 @@ namespace CodeChallenge.Controllers
 		{
 			_logger.LogDebug($"Received compensation create request for employee id '{compensation.EmployeeId}'");
 
-			_employeeService.Create(compensation);
+			_compensationService.Create(compensation);
 
-			//return CreatedAtRoute("getCompensationByEmployeeId", new { compensationId = compensation.CompensationId, employeeId = compensation.EmployeeId, salary = compensation.Salary, effectiveDate = compensation.EffectiveDate }, compensation);
-
-			return CreatedAtRoute("getCompensationByEmployeeId", new { employeeId = compensation.EmployeeId }, compensation);
+			return CreatedAtRoute("getCompensationByEmployeeId", new { compensationId = compensation.CompensationId }, compensation);
 		}
 
 		/// <summary>
@@ -51,7 +49,7 @@ namespace CodeChallenge.Controllers
 		{
 			_logger.LogDebug($"Received compensation get request for '{id}'");
 
-			var compensation = _employeeService.GetCompensationById(id);
+			var compensation = _compensationService.GetCompensationById(id);
 
 			if (compensation == null)
 				return NotFound();
