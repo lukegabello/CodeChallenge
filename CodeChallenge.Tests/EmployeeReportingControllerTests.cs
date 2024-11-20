@@ -52,6 +52,42 @@ namespace CodeCodeChallenge.Tests.Integration
 				Assert.AreEqual(4, reportingStructure.NumberOfReports);
 			}
 
+			[TestMethod]
+			public void GetEmployeeReportingStructureById2_Returns_Ok()
+			{
+				// Arrange
+				var employeeId = "03aa1462-ffa9-4978-901b-7c001562cf6f";
+				var expectedFirstName = "Ringo";
+				var expectedLastName = "Starr";
+
+				// Execute
+				var getRequestTask = _httpClient.GetAsync($"api/employeeReporting/{employeeId}");
+				var response = getRequestTask.Result;
+
+				// Assert
+				Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+				var reportingStructure = response.DeserializeContent<ReportingStructure>();
+				Assert.AreEqual(2, reportingStructure.NumberOfReports);
+			}
+
+			[TestMethod]
+			public void GetEmployeeReportingStructureById3_Returns_Ok()
+			{
+				// Arrange
+				var employeeId = "b7839309-3348-463b-a7e3-5de1c168beb3";
+				var expectedFirstName = "Paul";
+				var expectedLastName = "McCartney";
+
+				// Execute
+				var getRequestTask = _httpClient.GetAsync($"api/employeeReporting/{employeeId}");
+				var response = getRequestTask.Result;
+
+				// Assert
+				Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+				var reportingStructure = response.DeserializeContent<ReportingStructure>();
+				Assert.AreEqual(0, reportingStructure.NumberOfReports);
+			}
+
 			[ClassCleanup]
 			public static void CleanUpTest()
 			{

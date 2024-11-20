@@ -18,10 +18,10 @@ namespace CodeChallenge.Services
 		/// Constructor
 		/// </summary>
 		/// <param name="logger"></param>
-		/// <param name="employeeRepository"></param>
-		public CompensationService(ILogger<CompensationService> logger, IEmployeeRepository employeeRepository)
+		/// <param name="compensationRepository"></param>
+		public CompensationService(ILogger<CompensationService> logger, ICompensationRepository compensationRepository)
 		{
-			_employeeRepository = employeeRepository;
+			_compensationRepository = compensationRepository;
 			_logger = logger;
 		}
 

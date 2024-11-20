@@ -13,7 +13,7 @@ namespace CodeChallenge.Models
 		/// <summary>
 		/// Employee reporting structure is for
 		/// </summary>
-		public Employee Employee;
+		public Employee Employee { get; set; }
 
 		/// <summary>
 		/// Total number of reports under to the Employee.
@@ -26,6 +26,6 @@ namespace CodeChallenge.Models
 		///                  Pete Best   George Harrison
 		/// John Lennon would have 4 reports
 		/// </summary>
-		public int NumberOfReports;
+		public int NumberOfReports { get; set; }
 	}
 }
