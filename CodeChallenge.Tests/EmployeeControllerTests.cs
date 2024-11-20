@@ -81,6 +81,7 @@ namespace CodeCodeChallenge.Tests.Integration
             var employee = response.DeserializeContent<Employee>();
             Assert.AreEqual(expectedFirstName, employee.FirstName);
             Assert.AreEqual(expectedLastName, employee.LastName);
+            Assert.AreEqual(2, employee.DirectReports.Count);
         }
 
         [TestMethod]

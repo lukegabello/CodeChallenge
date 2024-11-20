@@ -6,7 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace CodeChallenge.Controllers
 {
-	public class CompensationController : Controller
+	[ApiController]
+	[Route("api/compensation")]
+	public class CompensationController : ControllerBase
 	{
 		private readonly ILogger _logger;
 		private readonly ICompensationService _compensationService;

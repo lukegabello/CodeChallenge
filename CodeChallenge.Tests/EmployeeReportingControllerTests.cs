@@ -19,7 +19,7 @@ namespace CodeCodeChallenge.Tests.Integration
 		private static TestServer _testServer;
 
 		[TestClass]
-		public class CompensationControllerTests
+		public class EmployeeCompensationControllerTests
 		{
 			private static HttpClient _httpClient;
 			private static TestServer _testServer;
@@ -32,6 +32,24 @@ namespace CodeCodeChallenge.Tests.Integration
 			{
 				_testServer = new TestServer();
 				_httpClient = _testServer.NewClient();
+			}
+
+			[TestMethod]
+			public void GetEmployeeReportingStructureById_Returns_Ok()
+			{
+				// Arrange
+				var employeeId = "16a596ae-edd3-4847-99fe-c4518e82c86f";
+				var expectedFirstName = "John";
+				var expectedLastName = "Lennon";
+
+				// Execute
+				var getRequestTask = _httpClient.GetAsync($"api/employeeReporting/{employeeId}");
+				var response = getRequestTask.Result;
+
+				// Assert
+				Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+				var reportingStructure = response.DeserializeContent<ReportingStructure>();
+				Assert.AreEqual(4, reportingStructure.NumberOfReports);
 			}
 
 			[ClassCleanup]

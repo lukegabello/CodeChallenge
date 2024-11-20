@@ -39,6 +39,8 @@ namespace CodeChallenge.Services
 					reportingStructure.NumberOfReports = ComputeNumberEmployeeReports(id);
 				}
 
+				return reportingStructure;
+
 			}
 
 			return null;
@@ -54,10 +56,13 @@ namespace CodeChallenge.Services
 		{
 			var employee = _employeeRepository.GetById(employeeId);
 
-			for (var index = 0; index < employee.DirectReports.Count; index++)
+			if (employee != null && employee.DirectReports != null)
 			{
-				numberOfDirectReports += employee.DirectReports.Count;
-				ComputeNumberEmployeeReports(employee.DirectReports[index].EmployeeId, numberOfDirectReports);
+				for (var index = 0; index < employee.DirectReports.Count; index++)
+				{
+					numberOfDirectReports += employee.DirectReports.Count;
+					ComputeNumberEmployeeReports(employee.DirectReports[index].EmployeeId, numberOfDirectReports);
+				}
 			}
 
 			return numberOfDirectReports;

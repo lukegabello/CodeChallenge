@@ -1,13 +1,17 @@
 ﻿using System;
-using CodeChallenge.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using CodeChallenge.Services;
+using CodeChallenge.Models;
 
 namespace CodeChallenge.Controllers
 {
 	[ApiController]
 	[Route("api/employeeReporting")]
-	public class EmployeeReportingController : Controller
+	public class EmployeeReportingController : ControllerBase
 	{
 		private readonly ILogger _logger;
 		private readonly IEmployeeReportingService _employeeReportingServiceService;
@@ -40,6 +44,7 @@ namespace CodeChallenge.Controllers
 			if (reportingStructure.Employee == null)
 				return NotFound();
 
+			//return Ok(reportingStructure);
 			return Ok(reportingStructure);
 		}
 	}
