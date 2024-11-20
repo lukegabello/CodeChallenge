@@ -61,5 +61,44 @@ namespace CodeChallenge.Services
 
 			return newEmployee;
 		}
+
+		/// <summary>
+		/// Gets the compensation information for an employee given their employee Id
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public Compensation GetCompensationById(string id)
+		{
+			if (!String.IsNullOrEmpty(id))
+			{
+				return _employeeRepository.GetCompensationById(id);
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Creates a compensation entry for an existing employee
+		/// </summary>
+		/// <param name="compensation"></param>
+		/// <returns></returns>
+		public Compensation Create(Compensation compensation)
+		{
+			if (!string.IsNullOrEmpty(compensation.EmployeeId))
+			{
+				// Verify there is an employee to create compensation for
+				// because a non-existent employee cannot have a compensation
+				var employee = _employeeRepository.GetById(compensation.EmployeeId);
+				if (employee != null)
+				{
+					_employeeRepository.Add(compensation);
+					_employeeRepository.SaveAsync().Wait();
+
+					return compensation;
+				}
+			}
+
+			return null;
+		}
 	}
 }

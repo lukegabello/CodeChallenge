@@ -41,5 +41,35 @@ namespace CodeChallenge.Repositories
         {
             return _employeeContext.Remove(employee).Entity;
         }
+
+        /// <summary>
+        /// Get compensation for the given employee id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Compensation for the employee</returns>
+        public Compensation GetCompensationById(string id)
+        {
+	        return _employeeContext.Compensations.SingleOrDefault(e => e.EmployeeId == id);
+        }
+
+        /// <summary>
+        /// Add compensation given employee id
+        /// </summary>
+        /// <param name="compensation"></param>
+        /// <returns>Compensation for the employee</returns>
+        public Compensation Add(Compensation compensation)
+        {
+	        // Only add compensation if an employee with the given employee id exists because you can not add
+	        // compensation for a non-existent employee
+	        var employee = _employeeContext.Employees.SingleOrDefault(e => e.EmployeeId == compensation.EmployeeId);
+	        if (employee != null)
+	        {
+		        compensation.CompensationId = Guid.NewGuid().ToString();
+		        _employeeContext.Add(compensation);
+		        return compensation;
+	        }
+
+	        return null;
+        }
 	}
 }
