@@ -60,10 +60,11 @@ namespace CodeChallenge.Services
 			{
 				for (var index = 0; index < employee.DirectReports.Count; index++)
 				{
-					numberOfDirectReports += employee.DirectReports.Count;
-					return ComputeNumberEmployeeReports(employee.DirectReports[index].EmployeeId, numberOfDirectReports);
+					numberOfDirectReports+=ComputeNumberEmployeeReports(employee.DirectReports[index].EmployeeId, numberOfDirectReports);
 				}
 			}
+
+			numberOfDirectReports += employee.DirectReports.Count;
 
 			return numberOfDirectReports;
 		}
